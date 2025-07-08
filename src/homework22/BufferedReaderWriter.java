@@ -4,7 +4,7 @@ import java.io.*;
 
 public class BufferedReaderWriter {
     public static void main(String[] args){
-        try(BufferedReader br = new BufferedReader(new FileReader("introduce.txt"))){
+        try(BufferedReader br = new BufferedReader(new FileReader("./src/homework22/introduce.txt"))){
             String line;
             StringBuilder result = new StringBuilder();
             String vowels = "аеёиоуыэюяАЕЁИОУЫЭЮЯ";
@@ -31,7 +31,7 @@ public class BufferedReaderWriter {
                 result.append("\n"); // добавляем перенос строки
             }
             System.out.println(result);
-            try(BufferedWriter bw = new BufferedWriter(new FileWriter("result_homework22.txt"))){
+            try(BufferedWriter bw = new BufferedWriter(new FileWriter("./src/homework22/result_homework22.txt"))){
                 bw.write(String.valueOf(result));
             }
             catch (IOException ex){

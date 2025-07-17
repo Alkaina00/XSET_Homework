@@ -1,11 +1,11 @@
 package homework24;
 
-public abstract class BaseSweetness {
+public abstract class Sweet {
     private String name;
     private double weight;
     private double price;
 
-    public BaseSweetness(String name, double weight, double price){
+    public Sweet(String name, double weight, double price){
         this.name = name;
         this.weight = weight;
         this.price = price;
@@ -34,4 +34,6 @@ public abstract class BaseSweetness {
     public void setPrice(String name){
         this.price = price;
     }
+
+    public abstract String getUniqueParameter();
 }

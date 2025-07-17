@@ -1,7 +1,17 @@
 package homework24;
 
-public class Сhocolate extends BaseSweetness{
-    name = "Сhocolate";
-    weight = 0.075;
-    price = 143.0;
+public class Chocolate extends Sweet {
+    private String type;
+    public Chocolate(String name, double weight, double price, String type){
+        super(name, weight, price);
+        this.type = type;
+    }
+
+    public String getUniqueParameter() {
+        return type;
+    }
+
+    public void setType(String type){
+        this.type = type;
+    }
 }

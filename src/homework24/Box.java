@@ -1,13 +1,10 @@
 package homework24;
 
-public interface BoxSweet {
-    public void addSweet();
-
-    public void deleteSweet();
-
-    public void getWeightBox();
-
-    public void getPriceBox();
-
-    public void getInformBox();
+public interface Box {
+    void addSweet(Sweet sweet);
+    void removeLast();
+    void removeByIndex(int i);
+    double getTotalWeight();
+    double getTotalPrice();
+    void getInform();
 }

@@ -1,6 +1,7 @@
 package homework24;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class BoxSweet implements Box{
     private ArrayList<Sweet> boxSweet = new ArrayList<>();
@@ -42,5 +43,27 @@ public class BoxSweet implements Box{
         }
         System.out.printf("Общий вес: %.2f\n", getTotalWeight());
         System.out.printf("Общая стоимость: %.2f\n", getTotalPrice());
+    }
+
+    public void optimizeByWeight(double targetWeight) {
+        while ( getTotalWeight() > targetWeight) {
+            Sweet minWeightSweet = boxSweet.stream()
+                    .min(Comparator.comparingDouble(Sweet::getWeight))
+                    .orElse(null);
+            if (minWeightSweet != null) {
+                boxSweet.remove(minWeightSweet);
+            }
+        }
+    }
+
+    public void optimizeByPrice(double targetPrice) {
+        while (getTotalPrice() > targetPrice) {
+            Sweet minPriceSweet = boxSweet.stream()
+                    .min(Comparator.comparingDouble(Sweet::getPrice))
+                    .orElse(null);
+            if (minPriceSweet != null) {
+                boxSweet.remove(minPriceSweet);
+            }
+        }
     }
 }

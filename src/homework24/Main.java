@@ -38,8 +38,8 @@ public class Main {
         ((BoxSweet)sweetBox).optimizeByWeight(0.8);
         sweetBox.getInform();
 
-        System.out.println("\nОптимизация по цене (цель: 900 руб)...");
-        ((BoxSweet)sweetBox).optimizeByPrice(900);
+        System.out.println("\nОптимизация по цене (цель: 0.5 кг)...");
+        ((BoxSweet)sweetBox).optimizeByPrice(0.5);
         sweetBox.getInform();
 
     }

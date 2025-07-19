@@ -56,8 +56,8 @@ public class BoxSweet implements Box{
         }
     }
 
-    public void optimizeByPrice(double targetPrice) {
-        while (getTotalPrice() > targetPrice) {
+    public void optimizeByPrice(double targetWeight) {
+        while (getTotalWeight() > targetWeight) {
             Sweet minPriceSweet = boxSweet.stream()
                     .min(Comparator.comparingDouble(Sweet::getPrice))
                     .orElse(null);

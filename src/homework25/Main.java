@@ -1,8 +1,7 @@
 package homework25;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -11,25 +10,13 @@ public class Main {
         ArrayList<String> result = new ArrayList<>();
         try(BufferedReader br = new BufferedReader(new FileReader("./src/homework25/text.txt"))){
             String line;
-            StringBuilder word = new StringBuilder();
 
             while((line=br.readLine()) != null){
-                for(char c: line.toCharArray()){
-                    //Пока символ является буквой записываем в word (исключение символ ')
-                    if(Character.isLetter(c) || c == '\''){
-                        if(Character.isUpperCase(c)){
-                            if(!word.isEmpty()){
-                                result.add(word.toString());
-                            }
-                            word.setLength(0);
-                        }
-                        word.append(c);
-                    }
-                    else {
-                        if(!word.isEmpty()){
-                            result.add(word.toString());
-                        }
-                        word.setLength(0);
+                // Разбиваем строку на слова, используя регулярное выражение для всех не-буквенных символов (кроме апострофа)
+                String[] words = line.split("[^a-zA-Z']+");
+                for (String word : words) {
+                    if (!word.isEmpty()) {
+                        result.add(word);
                     }
                 }
             }
@@ -39,10 +26,41 @@ public class Main {
             System.out.println(ex.getMessage());
         }
 
-        System.out.println(result);
+        System.out.println("Все слова из файла: \n" + result);
+        System.out.println(); // Добавляем перенос строки после вывода
 
         // Найти слово, встречающееся максимальное число раз в файле и его частоту и вывести на экран.
         //сделать хеш мапу где ключ слово, а кол-во повторений значение
+        Map<String, Integer> countWord = new HashMap<String, Integer>();
+        result.forEach(word -> countWord.merge(word, 1, Integer::sum));
 
+        // находим самое максимальное кол-во повторений
+        int maxCount = countWord.values().stream().max(Integer::compare).orElse(0);
+
+        // Выводим все слова с макс повторений
+        System.out.println("Слова, встречающиеся максимальное число раз в файле:");
+        countWord.entrySet().stream()
+                .filter(entry -> entry.getValue() == maxCount)
+                .forEach(entry -> System.out.print(entry.getKey() + " " + maxCount + "\n"));
+        System.out.println(); // Добавляем перенос строки после вывода
+
+        //То же самое, но не учитываем регистр слов
+        for(int i = 0; i < result.size(); i++){
+            result.set(i, result.get(i).toLowerCase());
+        }
+
+        //сделать хеш мапу где ключ слово, а кол-во повторений значение
+        Map<String, Integer> countWordReg = new HashMap<String, Integer>();
+        result.forEach(word -> countWordReg.merge(word, 1, Integer::sum));
+
+        // находим самое максимальное кол-во повторений
+        int maxCountReg = countWordReg.values().stream().max(Integer::compare).orElse(0);
+
+        // Выводим все слова с макс повторений
+        System.out.println("Слова, встречающиеся максимальное число раз в файле без учета регистра:");
+        countWordReg.entrySet().stream()
+                .filter(entry -> entry.getValue() == maxCountReg)
+                .forEach(entry -> System.out.print(entry.getKey() + " " + maxCountReg + "\n"));
+        System.out.println(); // Добавляем перенос строки после вывода
     }
 }
